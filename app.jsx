@@ -3,12 +3,15 @@ import React, { useState, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+
+// Context Providers (Integrated from all versions)
 import { ExamStoreProvider } from './contexts/ExamStoreContext';
+import { SetupProvider } from './contexts/SetupContext';
 import { AuthProvider } from './contexts/AuthContext';
 
-// Components
+// Pages (Comprehensive list from both versions)
 import LandingPage from './pages/LandingPage';
-import SetupWizard from './pages/SetupWizard';
+import EnhancedSetupWizard from './pages/EnhancedSetupWizard';
 import Dashboard from './pages/Dashboard';
 import SchedulePage from './pages/SchedulePage';
 import TestArena from './pages/TestArena';
@@ -18,6 +21,7 @@ import Analytics from './pages/Analytics';
 import Community from './pages/Community';
 import Settings from './pages/Settings';
 
+// Professional Query Client Configuration
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -32,14 +36,15 @@ function App() {
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    // Initialize app
+    // Nexus AI Engine Initialization Sequence
     const timer = setTimeout(() => {
       setIsInitialized(true);
-    }, 1000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
 
+  // Professional Loading Screen (Intelligence Layer)
   if (!isInitialized) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-950 via-black to-gray-950 flex items-center justify-center">
@@ -73,45 +78,49 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <ExamStoreProvider>
-          <Router>
-            <div className="App min-h-screen bg-gradient-to-br from-gray-950 via-black to-gray-950">
-              <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/setup" element={<SetupWizard />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/schedule" element={<SchedulePage />} />
-                <Route path="/tests" element={<TestArena />} />
-                <Route path="/resources" element={<ResourceLibrary />} />
-                <Route path="/focus" element={<FocusMode />} />
-                <Route path="/analytics" element={<Analytics />} />
-                <Route path="/community" element={<Community />} />
-                <Route path="/settings" element={<Settings />} />
-              </Routes>
-              
-              <Toaster
-                position="bottom-right"
-                toastOptions={{
-                  style: {
-                    background: '#1f2937',
-                    color: '#fff',
-                    border: '1px solid #374151',
-                  },
-                  success: {
-                    iconTheme: {
-                      primary: '#10b981',
-                      secondary: '#fff',
+          <SetupProvider>
+            <Router>
+              <div className="App min-h-screen bg-gradient-to-br from-gray-950 via-black to-gray-950">
+                <Routes>
+                  {/* Comprehensive Route Mapping */}
+                  <Route path="/" element={<LandingPage />} />
+                  <Route path="/setup" element={<EnhancedSetupWizard />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/schedule" element={<SchedulePage />} />
+                  <Route path="/tests" element={<TestArena />} />
+                  <Route path="/resources" element={<ResourceLibrary />} />
+                  <Route path="/focus" element={<FocusMode />} />
+                  <Route path="/analytics" element={<Analytics />} />
+                  <Route path="/community" element={<Community />} />
+                  <Route path="/settings" element={<Settings />} />
+                </Routes>
+                
+                {/* Advanced Toaster Configuration */}
+                <Toaster
+                  position="bottom-right"
+                  toastOptions={{
+                    style: {
+                      background: '#1f2937',
+                      color: '#fff',
+                      border: '1px solid #374151',
                     },
-                  },
-                  error: {
-                    iconTheme: {
-                      primary: '#ef4444',
-                      secondary: '#fff',
+                    success: {
+                      iconTheme: {
+                        primary: '#10b981',
+                        secondary: '#fff',
+                      },
                     },
-                  },
-                }}
-              />
-            </div>
-          </Router>
+                    error: {
+                      iconTheme: {
+                        primary: '#ef4444',
+                        secondary: '#fff',
+                      },
+                    },
+                  }}
+                />
+              </div>
+            </Router>
+          </SetupProvider>
         </ExamStoreProvider>
       </AuthProvider>
     </QueryClientProvider>
